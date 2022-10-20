@@ -62,3 +62,10 @@ var monday = [
   },
 ];
 var containerEl = $(".container");
+
+function displayTime() {
+    var now = moment().format("MMM Do, YYYY [at] h:mm:ss a");
+    time.text(now);
+  }
+  
+  setInterval(displayTime, 1000);
