@@ -69,3 +69,33 @@ function displayTime() {
   }
   
   setInterval(displayTime, 1000);
+
+  function writePlanner() {
+    $(".container").append("<table />");
+    $("table").addClass("col-12 col-med-9").attr("id", "table");
+    monday.forEach(function (thisHour) {
+      tRow = $("<tr>");
+      tCell = $("<td>").text(`${thisHour.hour}${thisHour.meridiem}`);
+      tCell2 = $("<td>").append("<textarea></textarea>");
+      tCell3 = $("<td>").append("&#128190;");
+      $("table").append(tRow.append(tCell.addClass("col-1 hour")));
+      $("table").append(
+        tRow.append(tCell2.addClass("col-10").attr("id", thisHour.id))
+      );
+      $("table").append(
+        tRow.append(tCell3.addClass("saveBtn col-1").attr("id", "saveIcon"))
+      );
+      if (thisHour.time < moment().hour()) {
+        tCell2.addClass("past");
+      } else if (thisHour.time == moment().hour()) {
+        tCell2.addClass("present");
+      } else if (thisHour.time > moment().hour()) {
+        tCell2.addClass("future");
+      }
+    });
+    $("tr").addClass("customRow col-12");
+    $("td").addClass("align-center justify-content-center");
+    $("textarea").addClass("col-12 planner");
+  }
+
+  writePlanner();
